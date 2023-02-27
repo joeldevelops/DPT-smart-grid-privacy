@@ -6,6 +6,8 @@ import * as energyService from "./energy.service";
 
 const router = Router();
 
+// GET /api/v1/energy/usages
+// Returns the energy usages from the fog node for all users that have registered
 router.get("/usages", async (req, res) => {
   try {
     const usages = await energyService.getUsages();
