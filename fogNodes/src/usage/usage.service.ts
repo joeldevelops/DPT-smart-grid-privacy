@@ -15,3 +15,12 @@ export const getUserUsages = async (): Promise<UserUsage[]> => {
   );
   return response.data;
 }
+
+// Fetches the energy usage from a single user. This is not used in this project, but
+// can be used by an evaluator to fetch the energy usage from a single user.
+export const getUserUsage = async (userId: string): Promise<UserUsage> => {
+  const response = await axios.get(
+    `http://${config.users.host}:${config.users.port}/api/v1/users/${userId}`
+  );
+  return response.data;
+}

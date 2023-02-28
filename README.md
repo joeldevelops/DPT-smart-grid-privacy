@@ -1,8 +1,20 @@
 # Privacy-Preserving Smart Electrical Grid
 
-This project is an implementation of the paper with the same name, which targets a means of preserving user privacy through theft-detection techniques.
+This project is an implementation of the paper with the same name, which targets a means of preserving user privacy through theft-detection techniques. Included is everything outside of the detector and its included ML model, which cannot be trained due to lack of data.
 
 ## Table of Contents
+
+- [Privacy-Preserving Smart Electrical Grid](#privacy-preserving-smart-electrical-grid)
+  - [Table of Contents](#table-of-contents)
+- [Design](#design)
+  - [Updated Design Diagram](#updated-design-diagram)
+  - [Implementation Details](#implementation-details)
+    - [Users](#users)
+    - [Database](#database)
+- [Usage](#usage)
+  - [Requesting Data](#requesting-data)
+  - [Running Individual Services](#running-individual-services)
+
 
 ---
 
@@ -25,6 +37,8 @@ For the most part, this project follows the design outlined in the paper. Howeve
 ### Users
 
 For the users we spawn them at random via the NodeJS service and have them reach out to the FogNodes to register themselves. Once they are registered, they will get their noise data from the NoiseGenerator on a timer.
+
+Additionally, we simulate all the users via one NodeJS service. This is done to make it easier to scale the number of users, as we can simply spawn more instances of the User class and have them all reach out to the FogNodes to register themselves.
 
 ### Database
 
@@ -53,3 +67,21 @@ curl -X GET http://localhost:3000/api/v1/energy/usage
 ```
 
 I recommend however to use a tool like postman to make the request to the server, as it will make it easier to see and look through the response.
+
+## Running Individual Services
+
+If you want to run an individual service, you can do so by running the following command:
+
+```bash
+docker compose up <service_name>
+```
+
+Where `<service_name>` is the name of the service you want to run. For example, to run the Cloud Server, you would run:
+
+```bash
+docker compose up cloud-server
+```
+
+This will start the service and the logs should scroll in your terminal once the project starts running.
+
+Ctrl|Cmd+C will stop the service.

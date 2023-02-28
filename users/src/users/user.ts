@@ -64,6 +64,7 @@ export class User {
     this.energyUseInterval = setInterval(() => this.useEnergy(), USAGE_INTERVAL);
   }
 
+  // This is the method for serializing the user object.
   public toJSON(): any {
     return {
       id: this.id,
@@ -72,6 +73,7 @@ export class User {
     }
   }
 
+  // Not called, but here for completeness.
   public stop() {
     clearInterval(this.fogNodeInterval);
     clearInterval(this.noiseGeneratorInterval);

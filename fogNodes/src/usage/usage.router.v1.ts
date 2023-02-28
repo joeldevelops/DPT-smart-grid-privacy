@@ -19,4 +19,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// GET /api/v1/usages/:userId
+// Returns a single user's energy usage data
+router.get("/:userId", async (req, res) => {
+  console.log(`Getting usage from user with ID: ${req.params.userId}...`)
+  try {
+    const usage = await usageService.getUserUsage(req.params.userId);
+    res.json(usage);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Unable to retrieve usage at this time");
+  }
+});
+
 export default router;

@@ -28,3 +28,8 @@ export function getUsers(): User[] {
   return users;
 }
 
+// Simulates pulling a specific user's data from the smart meter
+export function getUser(userId: string): User {
+  return users.find((user) => user.id === userId);
+}
+
