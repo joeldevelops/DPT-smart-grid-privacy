@@ -1,0 +1,10 @@
+// CLI configuration
+
+const path = require('path');
+
+module.exports = {
+  'config': path.resolve('src', 'db', 'config.js'),
+  // We don't use the models path, as it doesn't work with TS.
+  // Models path is only use for model generation.
+  'models-path': path.resolve('src', 'db'),
+};

@@ -6,7 +6,7 @@ import { UserUsage } from './energy.types';
 
 // Fetches the energy usages from the fog node
 export const getUsages = async (): Promise<UserUsage[]> => {
-  const response = await fetch(`${config.fogNode.host}:${config.fogNode.port}/api/v1/energy/usages`);
+  const response = await fetch(`${config.fogNode.host}:${config.fogNode.port}/api/v1/usages`);
   const usages = await response.json();
   return usages;
 }
