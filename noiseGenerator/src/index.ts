@@ -6,7 +6,7 @@
 import express from 'express';
 import { json } from 'body-parser';
 
-import { config } from './config';
+import config from './config';
 
 import noiseRouter from './noise';
 

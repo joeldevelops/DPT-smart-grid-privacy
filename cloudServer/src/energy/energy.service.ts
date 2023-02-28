@@ -1,6 +1,6 @@
 // This file is responsible for fetching the energy usages from the fog node
 
-import { config } from '../config';
+import config from '../config';
 
 import { UserUsage } from './energy.types';
 
