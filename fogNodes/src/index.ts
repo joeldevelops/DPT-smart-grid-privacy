@@ -9,6 +9,7 @@ import { json } from 'body-parser';
 import config from './config';
 
 import registerRouter from './register';
+import usageRouter from './usage';
 
 // IIFE, Immediately Invoked Function Expression to allow async/await
 (async () => {
@@ -17,9 +18,9 @@ import registerRouter from './register';
   // Enables JSON-ified body parsing
   app.use(json());
 
-  app.use('/api', registerRouter);
+  app.use('/api', registerRouter, usageRouter);
 
   app.listen(config.port, () => {
-    console.log(`CloudServer listening on port ${config.port}`);
+    console.log(`FogNode listening on port ${config.port}`);
   });
 })();

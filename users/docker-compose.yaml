@@ -3,8 +3,7 @@ services:
   users:
     build: .
     environment:
-      DBHOST: pg
-      PORT: 3000
+      PORT: 6000
     networks:
       - users
 

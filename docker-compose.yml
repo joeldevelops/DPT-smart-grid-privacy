@@ -1,0 +1,83 @@
+version: "3.7"
+services:
+  fog-node:
+    build: 
+      context: fogNodes
+      dockerfile: Dockerfile
+    # The below command will run the migrations prior to startup; idempotent
+    command: /bin/sh -c "npx sequelize-cli db:migrate && npm start"
+    environment:
+      DB_HOST: pg
+      PORT: 4000
+      USERS_PORT: 6000
+      USERS_HOST: users
+    ports:
+      - "4000:4000"
+    networks:
+      - smartGrid
+    depends_on:
+      pg:
+        condition: service_healthy
+
+  pg:
+    image: postgres:15.1-alpine
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - smartGrid
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+
+  cloud-server:
+    build:
+      context: cloudServer
+      dockerfile: Dockerfile
+    environment:
+      PORT: 3000
+      FOG_NODE_PORT: 4000
+      FOG_NODE_HOST: fog-node
+    ports:
+      - "3000:3000"
+    networks:
+      - smartGrid
+
+  noise-generator:
+    build:
+      context: noiseGenerator
+      dockerfile: Dockerfile
+    environment:
+      PORT: 5005
+    ports:
+      - "5005:5005"
+    networks:
+      - smartGrid
+
+  users:
+    build:
+      context: users
+      dockerfile: Dockerfile
+    environment:
+      PORT: 6000
+      FOG_NODE_PORT: 4000
+      FOG_NODE_HOST: fog-node
+      NOISE_GENERATOR_PORT: 5005
+      NOISE_GENERATOR_HOST: noise-generator
+    ports:
+      - "6000:6000"
+    networks:
+      - smartGrid
+
+volumes:
+  db_data:
+
+networks:
+  smartGrid:
+    name: smartGrid

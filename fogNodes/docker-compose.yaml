@@ -1,10 +1,11 @@
 version: "3.7"
 services:
-  fogNode:
+  fog-node:
     build: .
+    command: /bin/sh -c "sleep 10 && npx sequelize-cli db:migrate && npm start"
     environment:
-      DBHOST: pg
-      PORT: 3000
+      DB_HOST: pg
+      PORT: 4000
     networks:
       - fn
     depends_on:

@@ -8,6 +8,7 @@ module.exports = {
     host: process.env.DB_HOST || "localhost",
     url: process.env.DATABASE_URL || "",
     dialect: "postgres",
+    logging: false,
   },
   test: {
     username: process.env.DB_USERNAME || "root",
@@ -16,5 +17,6 @@ module.exports = {
     host: process.env.DB_HOST || "localhost",
     url: process.env.DATABASE_URL || "",
     dialect: "postgres",
+    logging: false,
   },
 };

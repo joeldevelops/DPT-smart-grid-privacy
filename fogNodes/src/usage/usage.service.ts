@@ -1,5 +1,6 @@
 // This service is responsible for fetching the energy usages from the users who have 
 // registered with the fog nodes
+import axios from 'axios';
 
 import config from '../config';
 
@@ -9,7 +10,8 @@ import { UserUsage } from './usage.types';
 // and fetch their usages. For the sake of this project, we will just fetch all the usages
 // from the users service via a single endpoint.
 export const getUserUsages = async (): Promise<UserUsage[]> => {
-  const response = await fetch(`${config.users.host}:${config.users.port}/api/v1/users`);
-  const usages = await response.json();
-  return usages;
+  const response = await axios.get(
+    `http://${config.users.host}:${config.users.port}/api/v1/users`
+  );
+  return response.data;
 }

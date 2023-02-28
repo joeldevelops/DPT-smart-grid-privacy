@@ -17,20 +17,20 @@ class Register extends Model {
 Register.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
     userId: {
-      type: new DataTypes.STRING(128),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     name: {
-      type: new DataTypes.STRING(128),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     registeredDomain: {
-      type: new DataTypes.STRING(128),
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

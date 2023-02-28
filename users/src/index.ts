@@ -20,6 +20,6 @@ import usersRouter from './users';
   app.use('/api', usersRouter);
 
   app.listen(config.port, () => {
-    console.log(`CloudServer listening on port ${config.port}`);
+    console.log(`Users Server listening on port ${config.port}`);
   });
 })();

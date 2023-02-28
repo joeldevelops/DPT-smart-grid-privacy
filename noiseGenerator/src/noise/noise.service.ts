@@ -8,5 +8,5 @@ export const generateNoise = (): number => {
 
   let rand2 = Math.random();
   rand2 = 2 * Math.PI * rand2;
-  return Math.sqrt(rand1 * variance) * Math.cos(rand2);
+  return Math.abs(Math.sqrt(rand1 * variance) * Math.cos(rand2));
 };

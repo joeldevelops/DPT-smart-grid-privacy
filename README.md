@@ -43,3 +43,13 @@ make up
 This will start everything and the logs should scroll in your terminal once the project starts running.
 
 Ctrl|Cmd+C will stop the project.
+
+## Requesting Data
+
+As in the paper, a detector would subscribe to the Cloud Server to get data about energy usage. To do this, you can make a request to `http://localhost:3000/api/v1/energy/usage`
+
+```bash
+curl -X GET http://localhost:3000/api/v1/energy/usage
+```
+
+I recommend however to use a tool like postman to make the request to the server, as it will make it easier to see and look through the response.
