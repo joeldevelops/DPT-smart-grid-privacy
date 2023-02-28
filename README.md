@@ -2,6 +2,8 @@
 
 This project is an implementation of the paper with the same name, which targets a means of preserving user privacy through theft-detection techniques. Included is everything outside of the detector and its included ML model, which cannot be trained due to lack of data.
 
+Each service has its own README with more details on the structure and available endpoints.
+
 ## Table of Contents
 
 - [Privacy-Preserving Smart Electrical Grid](#privacy-preserving-smart-electrical-grid)
@@ -12,6 +14,7 @@ This project is an implementation of the paper with the same name, which targets
     - [Users](#users)
     - [Database](#database)
 - [Usage](#usage)
+  - [What The Logs Mean](#what-the-logs-mean)
   - [Requesting Data](#requesting-data)
   - [Running Individual Services](#running-individual-services)
 
@@ -54,11 +57,22 @@ To run this project, you will need to have Docker and Docker Compose installed. 
 make up
 ```
 
-This will start everything and the logs should scroll in your terminal once the project starts running.
+This will start everything and the logs should scroll in your terminal once the project starts running. It may take up to 5 seconds after docker compose is running the services for them all to be ready to accept requests. This is because PG takes a few seconds to start up.
 
 Ctrl|Cmd+C will stop the project.
 
+## What The Logs Mean
+
+The logs will scroll in your terminal as the project runs. Here is a quick overview of what each service is doing:
+
+- `cloud-server`: This is the Cloud Server that is used to store the data for the Users and FogNodes. It also has an endpoint that the detector can use to get the data. It won't do anything on its own until you make a request to it via curl or HTTP.
+- `fog-node`: This is the Fog Node that is used to store the data for the registered Users. It also has an endpoint that the CloudServer calls to collect the user usage data. Users will also reach out to this service to register themselves periodically.
+- `noise-generator`: This is the Noise Generator that the Users call to get the noise data. You will see logs from the users when they call this service to get noise.
+- `user`: This is the User service that is used to simulate the users. It will reach out to the FogNodes to register itself and then will reach out to the NoiseGenerator to get the noise data. Most logs will come from this service.
+
 ## Requesting Data
+
+This is possible after all 4 services are running and have announced they are listening on their ports.
 
 As in the paper, a detector would subscribe to the Cloud Server to get data about energy usage. To do this, you can make a request to `http://localhost:3000/api/v1/energy/usage`
 

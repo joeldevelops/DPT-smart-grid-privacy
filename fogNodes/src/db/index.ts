@@ -1,5 +1,8 @@
+// Database connection initialization
+
 import { Sequelize } from "sequelize";
 
+// Need to use standard require here because of the way the config must be in JS and not TS
 const pgConfig = require("./config");
 import config from "../config";
 const dbConfig = pgConfig[config.runtimeEnv];
