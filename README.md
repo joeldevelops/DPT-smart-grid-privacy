@@ -4,6 +4,8 @@ This project is an implementation of the paper with the same name, which targets
 
 Each service has its own README with more details on the structure and available endpoints.
 
+[The Github Repo is available here.](https://github.com/joeldevelops/DPT-smart-grid-privacy)
+
 ## Table of Contents
 
 - [Privacy-Preserving Smart Electrical Grid](#privacy-preserving-smart-electrical-grid)
@@ -13,6 +15,7 @@ Each service has its own README with more details on the structure and available
   - [Implementation Details](#implementation-details)
     - [Users](#users)
     - [Database](#database)
+  - [Authentication](#authentication)
 - [Usage](#usage)
   - [What The Logs Mean](#what-the-logs-mean)
   - [Requesting Data](#requesting-data)
@@ -46,6 +49,10 @@ Additionally, we simulate all the users via one NodeJS service. This is done to 
 ### Database
 
 The database is a single PGSQL database that is used to store the data for the Users, FogNodes, and NoiseGenerator. The single DB is for ease-of-use, but in a real-world scenario, we would have a separate DB for each of these services.
+
+## Authentication
+
+For a distributed system like this, it would be common to use encrypted methods of communication paired with some sort of authentication. However, for the purposes of this project, we are not implementing any sort of authentication. This is because the goal of this project is to demonstrate the privacy-preserving techniques, and not to demonstrate the security of the system.
 
 ---
 
